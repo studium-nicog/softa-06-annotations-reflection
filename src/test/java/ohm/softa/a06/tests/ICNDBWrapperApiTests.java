@@ -32,7 +32,8 @@ class ICNDBWrapperApiTests {
 
 	@BeforeEach
 	void setup() {
-
+		// note: you can igore a warning regarding illegal reflective access, see
+		// https://github.com/square/retrofit/issues/3341
 		Retrofit retrofit = new Retrofit.Builder()
 				.addConverterFactory(GsonConverterFactory.create())
 				.baseUrl("http://api.icndb.com")

@@ -4,28 +4,28 @@ plugins {
     id 'idea'
 }
 
-group 'de.thro.inf.prg3'
+group 'ohm.softa'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = 11
 
-mainClassName = "de.thro.inf.prg3.a06.App"
+mainClassName = "ohm.softa.a06.App"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("org.apache.commons:commons-lang3:$commons_lang3_version")
+    implementation("org.apache.commons:commons-lang3:$apacheCommonsLangVersion")
     implementation("org.apache.logging.log4j:log4j-api:${log4j2Version}")
     implementation("org.apache.logging.log4j:log4j-core:${log4j2Version}")
 
-    implementation("com.squareup.retrofit2:retrofit:${retrofit_version}")
-    implementation("com.squareup.retrofit2:converter-gson:${retrofit_version}")
+    implementation("com.squareup.retrofit2:retrofit:${squareRetrofitVersion}")
+    implementation("com.squareup.retrofit2:converter-gson:${squareRetrofitVersion}")
 
-    testCompile("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-    testRuntime("org.junit.jupiter:junit-jupiter-params:${junitVersion}")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-params:${junitVersion}")
 }
 
 test {

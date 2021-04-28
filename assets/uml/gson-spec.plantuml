@@ -6,7 +6,7 @@ package com.google.gson {
 }
 
 
-package de.thro.inf.prg3.a06 {
+package ohm.softa.a06 {
     +class JokeAdapter extends TypeAdapter {
     }
 }

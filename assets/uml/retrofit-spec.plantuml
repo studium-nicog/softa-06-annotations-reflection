@@ -5,7 +5,7 @@ package ohm.softa.a06 {
     +interface ICNDBApi {
         getRandomJoke(): Call<Joke>
         getRandomJoke(categoriesToInclude: String[]): Call<Joke>
-        getRandomJokes(count: int): Call<List<Joke>>
+        getRandomJokes(count: int): Call<Joke[]>
         getJokeById(id: int): Call<Joke>
     }
 

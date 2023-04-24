@@ -1,13 +1,14 @@
-@startuml ModelSpec
-package ohm.softa.a06.model {
+@startuml
+!theme vibrant
+package de.thro.inf.prg3.a06.model as P1 {
     +class Joke {
 
-        -number: int
+        -identifier: String
         -content: String
         -rubrics: String[]
 
-        +getNumber(): int
-        +setNumber(number: int): void
+        +getIdentifier(): String
+        +setIdentifier(identifier: String): void
         +getContent(): String
         +setContent(content: String): void
         +getRubrics(): String[]

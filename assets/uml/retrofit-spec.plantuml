@@ -1,17 +1,16 @@
-@startuml RetrofitAdapter
+@startuml
+!theme vibrant
+package ohm.softa.a06 as P1 {
 
-package ohm.softa.a06 {
-
-    +interface ICNDBApi {
+    +interface CNJDBApi {
         getRandomJoke(): Call<Joke>
-        getRandomJoke(categoriesToInclude: String[]): Call<Joke>
-        getRandomJokes(count: int): Call<Joke[]>
-        getJokeById(id: int): Call<Joke>
+        getRandomJoke(categories: String[]): Call<Joke>
+        getJokesBySearch(query: String): Call<Joke[]>
+        getJoke(id: String): Call<Joke>
     }
 
     +class App {
         +{static} main(args: String[]): void
     }
 }
-
 @enduml

@@ -5,8 +5,7 @@ _This is an assignment to the [Software Architecture](https://ohm-softa.github.i
 [![Travis CI](https://travis-ci.org/hsro-inf-prg3/06-annotations-reflection.svg?branch=master)](https://travis-ci.org/hsro-inf-prg3/06-annotations-reflection)
 
 In this assignment we will use Java annotations and reflection to interact with a remote REST ([Representational State Transfer](https://en.wikipedia.org/wiki/Representational_state_transfer)) API.
-As everyone (or maybe just me) loves Chuck Norris jokes we will implement a simple program to get random Chuck Norris jokes from the [ICNDB](http://www.icndb.com/) (**I**nternet **C**huck **N**orris **D**ata**b**ase).
-
+As everyone (or maybe just me) loves Chuck Norris jokes we will implement a simple program to get random Chuck Norris jokes from the [CNJDB](https://api.chucknorris.io/) (**C**huck **N**orris **J**okes **D**ata**b**ase).
 
 ## Setup
 
@@ -67,8 +66,8 @@ The following code snippet shows the structure of a simple JSON object:
 
 ```json
 {
-    "id": 558,
-    "joke": "Ghosts are actually caused by Chuck Norris killing people faster than Death can process them.",
+    "id": "id-13434",
+    "value": "Ghosts are actually caused by Chuck Norris killing people faster than Death can process them.",
     "categories": []
 }
 ```
@@ -77,8 +76,8 @@ The most basic use case is to de/serialize objects; by defaut, Gson uses reflect
 
 ```java
 class Joke {
-  int id;
-  String joke;
+  String id;
+  String value;
   String[] categories;
 }
 ```
@@ -87,7 +86,7 @@ class Joke {
 Gson gson = new Gson();
 
 // JSON String --> Object
-Joke j = gson.fromJson("{\"id\": 0, \"joke\": \"Haha.\"}", Joke.class);
+Joke j = gson.fromJson("{\"id\": 0, \"value\": \"Haha.\"}", Joke.class);
 // categories remains `null`
 
 // Objec --> JSON String
@@ -108,18 +107,13 @@ Have a look at the [docs](https://github.com/google/gson/blob/master/UserGuide.m
 
 ## Retrofit and Gson
 
-As you could see from the examples above, the actual response body of the ICNDB API looks like the following:
+As you could see from the examples above, the actual response body of the CNJDB API looks like the following:
 
 ```json
 {
-  "type": "success",
-  "value": {
-    "id": 467,
-    "joke": "Chuck Norris can delete the Recycling Bin.",
-    "categories": [
-      "nerdy"
-    ]
-  }
+	"categories": ["nerdy"],
+	"id": "irKXY3NtTXGe6W529sVlOg",
+	"value": "Chuck Norris can delete the Recycling Bin."
 }
 ```
 
@@ -140,7 +134,7 @@ public abstract class TypeAdapter<T> {
 }
 ```
 
-- Write a type adapter that accepts the response objects from ICNDB and outputs an instance of `Joke`.
+- Write a type adapter that accepts the response objects from CNJDB and outputs an instance of `Joke`.
 - Register the type adapter with your Retrofit instance
 Note that you can use annotations on the `Joke` class, but you will have to write custom code to unwrap the joke from the response object.
 For this, you have two options:
@@ -150,21 +144,21 @@ For this, you have two options:
 
 > Note: There is no need to implement the `write` method, since we're only consuming the API, but not sending to it.
 
-Check out this extensive [tutorial on Gson type adapters](http://www.javacreed.com/gson-typeadapter-example).
+Check out this extensive [tutorial on Gson type adapters](http://www.javacreed.com/gson-typeadapter-example/).
 
 
 ## Retrofit
 
 Retrofit is a great library to implement HTTP clients.
 To create an HTTP client, create an interface containing some methods you will call later to perform HTTP requests.
-Retrofit also uses annotations to conveniently map these methods to API resource paths, e.g. `getJoke(488, "Bruce", "Wayne")` can be mapped to `GET http://api.icndb.com/jokes/488?firstName=Bruce&lastName=Wayne`.
+Retrofit also uses annotations to conveniently map these methods to API resource paths, e.g. `getJokesBySearch("horse")` can be mapped to `GET https://api.chucknorris.io/jokes/search?query=horse`.
 
-Read through the [Retrofit documentation](http://square.github.io/retrofit/) and implement the `ICNDBApi` interface as shown in the following UML:
+Read through the [Retrofit documentation](http://square.github.io/retrofit/) and implement the `CNJDBApi` interface as shown in the following UML:
 
 ![Retrofic spec](./assets/images/RetrofitAdapter.svg)
 
 - Start by implementing the method `getRandomJoke()`; use the appropriate annotations to decodate the interface method.
-- Modify the `main` method in the `App` class to create an instance of the `ICNDBApi` using `Retrofit.Builder`. You need to add a converter factory that helps converting the JSON response to an object; you can set Gson using `GsonConverterFactory.create()`.
+- Modify the `main` method in the `App` class to create an instance of the `CNJDBApi` using `Retrofit.Builder`. You need to add a converter factory that helps converting the JSON response to an object; you can set Gson using `GsonConverterFactory.create()`.
 - Print a random joke to `System.out`, and complete the test method `testCollision`. Recall that you work with `Call` objects that need to be executed before you can retrieve the response body.
 - After completing the `getRandomJoke()` method try to add the other methods.
 - If you are not sure if your query strings are correct you can test them within the command line using `curl` or in a browser extension such as [Postman](https://www.getpostman.com/).
@@ -172,14 +166,14 @@ Read through the [Retrofit documentation](http://square.github.io/retrofit/) and
 Most unix systems will provide the cURL program:
 
 ```bash
-curl -X GET "http://api.icndb.com/jokes/random" -H "accept: application/json"
+curl -X GET "https://api.chucknorris.io/jokes/random" -H "accept: application/json"
 ```
 
 On Windows, you can use the PowerShell to accomplish the same like so:
 
 ```ps
 (Invoke-WebRequest
-    -Uri http://api.icndb.com/jokes/random
+    -Uri https://api.chucknorris.io/jokes/random
     -Headers @{"accept"="application/json"}
     ).Content | ConvertFrom-Json | ConvertTo-Json
 ```

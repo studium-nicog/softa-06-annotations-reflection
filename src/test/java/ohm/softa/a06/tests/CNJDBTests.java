@@ -76,18 +76,10 @@ class CNJDBTests {
 	@Test
 	void testGetJokeById() throws IOException {
 
-		List<String> randomIds = new ArrayList<>(10);
-
-		for (int i = 0; i < 10; i++) {
-			randomIds.add(CNJDBApi.getRandomJoke().execute().body().getIdentifier());
-		}
-
-		for (String id : randomIds) {
-			Joke j = CNJDBApi.getJoke(id).execute().body();
-			assertNotNull(j);
-			assertTrue(randomIds.contains(j.getIdentifier()));
-			logger.info(j.toString());
-		}
+		Joke j = CNJDBApi.getJoke("95DZsnYYRv-xi_8u2NOfyw").execute().body();
+		assertNotNull(j);
+		assertEquals("95DZsnYYRv-xi_8u2NOfyw", j.getIdentifier());
+		assertTrue(j.getContent().contains("himself on his own"));
 	}
 
 	@Test

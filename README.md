@@ -7,7 +7,6 @@ _This is an assignment to the [Software Architecture](https://ohm-softa.github.i
 In this assignment we will use Java annotations and reflection to interact with a remote REST ([Representational State Transfer](https://en.wikipedia.org/wiki/Representational_state_transfer)) API.
 As everyone (or maybe just me) loves Chuck Norris jokes we will implement a simple program to get random Chuck Norris jokes from the [CNJDB](https://api.chucknorris.io/) (**C**huck **N**orris **J**okes **D**ata**b**ase).
 
-
 ## Setup
 
 1. Create a fork of this repository (button in the right upper corner)

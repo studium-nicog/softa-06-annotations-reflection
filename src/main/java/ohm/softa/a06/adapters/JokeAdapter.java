@@ -28,29 +28,8 @@ public class JokeAdapter extends TypeAdapter<Joke> {
 	@Override
 	public Joke read(JsonReader in) throws IOException {
 		Joke result = null;
-		/* start to read from JsonReader */
-		in.beginObject();
 
-		/* iterate the reader (iterator!) */
-		while (in.hasNext()) {
-
-			/* switch-case on String (supported since Java 8) */
-			switch (in.nextName()) {
-				/* check if request was successfull */
-				case "type":
-					if (!in.nextString().equals("success")) {
-						throw new IOException();
-					}
-					break;
-				/* serialize the inner value simply by calling Gson because we mapped the fields to JSON keys */
-				case "value":
-					result = gson.fromJson(in, Joke.class);
-					break;
-			}
-		}
-
-		/* required to fix JSON document not fully consumed exception */
-		in.endObject();
+		result = gson.fromJson(in, Joke.class);
 
 		return result;
 	}

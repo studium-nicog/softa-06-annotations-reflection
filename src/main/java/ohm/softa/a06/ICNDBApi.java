@@ -16,20 +16,11 @@ public interface ICNDBApi {
 	Call<Joke> getRandomJoke();
 
 	@GET("/jokes/random")
-	Call<Joke> getRandomJoke(@Query("firstName") String firstName, @Query("lastName") String lastName);
+	Call<Joke> getRandomJoke(@Query("categories") String[] categories);
 
-	@GET("/jokes/random/{count}")
-	Call<Joke[]> getRandomJokes(@Path("count") int count);
-
-	@GET("/jokes/random/{count}")
-	Call<Joke[]> getRandomJokes(@Path("count") int count, @Query("firstName") String firstName, @Query("lastName") String lastName);
-
-	@GET("/jokes/random/{count}")
-	Call<Joke[]> getRandomJokes(@Path("count") int count, @Query("limitTo") String[] categories);
-
-	@GET("/jokes/random/{count}")
-	Call<Joke[]> getRandomJokes(@Path("count") int count, @Query("limitTo") String[] categories, @Query("firstName") String firstName, @Query("lastName") String lastName);
+	@GET("/jokes/search")
+	Call<Joke[]> getJokesBySearch(@Query("query") String query);
 
 	@GET("/jokes/{id}")
-	Call<Joke> getJoke(@Path("id") int number);
+	Call<Joke> getJoke(@Path("id") String identifier);
 }

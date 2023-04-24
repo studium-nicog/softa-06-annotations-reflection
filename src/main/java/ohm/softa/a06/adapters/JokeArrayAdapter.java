@@ -36,14 +36,14 @@ public class JokeArrayAdapter extends TypeAdapter<Joke[]> {
 
 			/* switch-case on String (supported since Java 8) */
 			switch (in.nextName()) {
-				/* check if request was successful */
-				case "type":
-					if (!in.nextString().equals("success")) {
-						throw new IOException();
-					}
+
+				case "total":
+					/* skip the total field */
+					in.skipValue();
 					break;
+
 				/* serialize the inner value simply by calling Gson because we mapped the fields to JSON keys */
-				case "value":
+				case "result":
 					result = gson.fromJson(in, Joke[].class);
 					break;
 			}

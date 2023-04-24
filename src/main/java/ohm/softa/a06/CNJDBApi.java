@@ -10,7 +10,7 @@ import retrofit2.http.Query;
  * @author Peter Kurfer
  * Created on 11/10/17.
  */
-public interface ICNDBApi {
+public interface CNJDBApi {
 
 	@GET("/jokes/random")
 	Call<Joke> getRandomJoke();

@@ -2,7 +2,7 @@ package ohm.softa.a06.tests;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import ohm.softa.a06.ICNDBApi;
+import ohm.softa.a06.CNJDBApi;
 import ohm.softa.a06.adapters.JokeAdapter;
 import ohm.softa.a06.adapters.JokeArrayAdapter;
 import ohm.softa.a06.model.Joke;
@@ -26,12 +26,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @author Peter Kurfer
  * Created on 11/10/17.
  */
-class ICNDBTests {
+class CNJDBTests {
 
-	private static final Logger logger = LogManager.getLogger(ICNDBTests.class);
+	private static final Logger logger = LogManager.getLogger(CNJDBTests.class);
 	private static final int REQUEST_COUNT = 1000;
 
-	private ICNDBApi icndbApi;
+	private CNJDBApi CNJDBApi;
 
 	@BeforeEach
 	void setup() {
@@ -45,7 +45,7 @@ class ICNDBTests {
 			.baseUrl("https://api.chucknorris.io")
 			.build();
 
-		icndbApi = retrofit.create(ICNDBApi.class);
+		CNJDBApi = retrofit.create(CNJDBApi.class);
 	}
 
 	@Test
@@ -55,7 +55,7 @@ class ICNDBTests {
 		boolean collision = false;
 
 		while (requests++ < REQUEST_COUNT) {
-			Call<Joke> jokeCall = icndbApi.getRandomJoke();
+			Call<Joke> jokeCall = CNJDBApi.getRandomJoke();
 			Response<Joke> jokeResponse = jokeCall.execute();
 			if (!jokeResponse.isSuccessful()) continue;
 			Joke j = jokeResponse.body();
@@ -79,11 +79,11 @@ class ICNDBTests {
 		List<String> randomIds = new ArrayList<>(10);
 
 		for (int i = 0; i < 10; i++) {
-			randomIds.add(icndbApi.getRandomJoke().execute().body().getIdentifier());
+			randomIds.add(CNJDBApi.getRandomJoke().execute().body().getIdentifier());
 		}
 
 		for (String id : randomIds) {
-			Joke j = icndbApi.getJoke(id).execute().body();
+			Joke j = CNJDBApi.getJoke(id).execute().body();
 			assertNotNull(j);
 			assertTrue(randomIds.contains(j.getIdentifier()));
 			logger.info(j.toString());
@@ -93,7 +93,7 @@ class ICNDBTests {
 	@Test
 	void testGetJokeByQuery() throws IOException {
 
-		Joke[] jokes = icndbApi.getJokesBySearch("horse").execute().body();
+		Joke[] jokes = CNJDBApi.getJokesBySearch("horse").execute().body();
 
 		assert jokes != null;
 		for (Joke j : jokes) {

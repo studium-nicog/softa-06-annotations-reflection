@@ -16,7 +16,7 @@ public interface CNJDBApi {
 	Call<Joke> getRandomJoke();
 
 	@GET("/jokes/random")
-	Call<Joke> getRandomJoke(@Query("categories") String[] categories);
+	Call<Joke> getRandomJoke(@Query("category") String[] categories);
 
 	@GET("/jokes/search")
 	Call<Joke[]> getJokesBySearch(@Query("query") String query);

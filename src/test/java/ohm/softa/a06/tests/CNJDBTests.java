@@ -103,4 +103,17 @@ class CNJDBTests {
 		}
 
 	}
+
+	@Test
+	void testGetJokeByCategory() throws IOException {
+
+		String[] categories = {"animal"};
+		Joke joke = CNJDBApi.getRandomJoke(categories).execute().body();
+
+		assertNotNull(joke);
+		logger.info(joke.getContent());
+		logger.warn(joke.getRubrics());
+		assertTrue(joke.getRubrics().contains("animal"));
+
+	}
 }

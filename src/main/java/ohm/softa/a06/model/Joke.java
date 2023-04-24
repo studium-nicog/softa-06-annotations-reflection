@@ -15,26 +15,26 @@ import java.util.List;
 public final class Joke {
 
 	@SerializedName("id")
-	private int number;
+	private String identifier;
 
-	@SerializedName("joke")
+	@SerializedName("value")
 	private String content;
 
 	@SerializedName("categories")
 	private List<String> rubrics;
 
 	public Joke() {
-		number = -1;
+		identifier = "";
 		content = "Not correctly deserialized";
 		rubrics = new LinkedList<>();
 	}
 
-	public int getNumber() {
-		return number;
+	public String getIdentifier() {
+		return identifier;
 	}
 
-	public void setNumber(int number) {
-		this.number = number;
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
 	}
 
 	public String getContent() {
@@ -62,27 +62,27 @@ public final class Joke {
 		Joke joke1 = (Joke) o;
 
 		return new EqualsBuilder()
-				.append(getNumber(), joke1.getNumber())
-				.append(getContent(), joke1.getContent())
-				.append(rubrics, joke1.rubrics)
-				.isEquals();
+			.append(getIdentifier(), joke1.getIdentifier())
+			.append(getContent(), joke1.getContent())
+			.append(rubrics, joke1.rubrics)
+			.isEquals();
 	}
 
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder(17, 37)
-				.append(getNumber())
-				.append(getContent())
-				.append(rubrics)
-				.toHashCode();
+			.append(getIdentifier())
+			.append(getContent())
+			.append(rubrics)
+			.toHashCode();
 	}
 
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
-				.append("number", number)
-				.append("content", content)
-				.append("rubrics", rubrics)
-				.toString();
+			.append("identifier", identifier)
+			.append("content", content)
+			.append("rubrics", rubrics)
+			.toString();
 	}
 }

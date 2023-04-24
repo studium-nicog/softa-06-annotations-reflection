@@ -67,8 +67,8 @@ The following code snippet shows the structure of a simple JSON object:
 
 ```json
 {
-    "id": 558,
-    "joke": "Ghosts are actually caused by Chuck Norris killing people faster than Death can process them.",
+    "id": "id-13434",
+    "value": "Ghosts are actually caused by Chuck Norris killing people faster than Death can process them.",
     "categories": []
 }
 ```
@@ -77,8 +77,8 @@ The most basic use case is to de/serialize objects; by defaut, Gson uses reflect
 
 ```java
 class Joke {
-  int id;
-  String joke;
+  String id;
+  String value;
   String[] categories;
 }
 ```
@@ -87,7 +87,7 @@ class Joke {
 Gson gson = new Gson();
 
 // JSON String --> Object
-Joke j = gson.fromJson("{\"id\": 0, \"joke\": \"Haha.\"}", Joke.class);
+Joke j = gson.fromJson("{\"id\": 0, \"value\": \"Haha.\"}", Joke.class);
 // categories remains `null`
 
 // Objec --> JSON String

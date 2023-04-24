@@ -112,14 +112,9 @@ As you could see from the examples above, the actual response body of the CNJDB 
 
 ```json
 {
-  "type": "success",
-  "value": {
-    "id": 467,
-    "joke": "Chuck Norris can delete the Recycling Bin.",
-    "categories": [
-      "nerdy"
-    ]
-  }
+	"categories": ["nerdy"],
+	"id": "irKXY3NtTXGe6W529sVlOg",
+	"value": "Chuck Norris can delete the Recycling Bin."
 }
 ```
 
@@ -157,14 +152,14 @@ Check out this extensive [tutorial on Gson type adapters](http://www.javacreed.c
 
 Retrofit is a great library to implement HTTP clients.
 To create an HTTP client, create an interface containing some methods you will call later to perform HTTP requests.
-Retrofit also uses annotations to conveniently map these methods to API resource paths, e.g. `getJoke(488, "Bruce", "Wayne")` can be mapped to `GET http://api.icndb.com/jokes/488?firstName=Bruce&lastName=Wayne`.
+Retrofit also uses annotations to conveniently map these methods to API resource paths, e.g. `getJokesBySearch("horse")` can be mapped to `GET https://api.chucknorris.io/jokes/search?query=horse`.
 
-Read through the [Retrofit documentation](http://square.github.io/retrofit/) and implement the `ICNDBApi` interface as shown in the following UML:
+Read through the [Retrofit documentation](http://square.github.io/retrofit/) and implement the `CNJDBApi` interface as shown in the following UML:
 
 ![Retrofic spec](./assets/images/RetrofitAdapter.svg)
 
 - Start by implementing the method `getRandomJoke()`; use the appropriate annotations to decodate the interface method.
-- Modify the `main` method in the `App` class to create an instance of the `ICNDBApi` using `Retrofit.Builder`. You need to add a converter factory that helps converting the JSON response to an object; you can set Gson using `GsonConverterFactory.create()`.
+- Modify the `main` method in the `App` class to create an instance of the `CNJDBApi` using `Retrofit.Builder`. You need to add a converter factory that helps converting the JSON response to an object; you can set Gson using `GsonConverterFactory.create()`.
 - Print a random joke to `System.out`, and complete the test method `testCollision`. Recall that you work with `Call` objects that need to be executed before you can retrieve the response body.
 - After completing the `getRandomJoke()` method try to add the other methods.
 - If you are not sure if your query strings are correct you can test them within the command line using `curl` or in a browser extension such as [Postman](https://www.getpostman.com/).

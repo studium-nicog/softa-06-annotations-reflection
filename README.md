@@ -5,7 +5,7 @@ _This is an assignment to the [Software Architecture](https://ohm-softa.github.i
 [![Travis CI](https://travis-ci.org/hsro-inf-prg3/06-annotations-reflection.svg?branch=musterloesung)](https://travis-ci.org/hsro-inf-prg3/06-annotations-reflection)
 
 In this assignment we will use Java annotations and reflection to interact with a remote REST ([Representational State Transfer](https://en.wikipedia.org/wiki/Representational_state_transfer)) API.
-As everyone (or maybe just me) loves Chuck Norris jokes we will implement a simple program to get random Chuck Norris jokes from the [ICNDB](http://www.icndb.com/) (**I**nternet **C**huck **N**orris **D**ata**b**ase).
+As everyone (or maybe just me) loves Chuck Norris jokes we will implement a simple program to get random Chuck Norris jokes from the [CNJDB](https://api.chucknorris.io/) (**C**huck **N**orris **J**okes **D**ata**b**ase).
 
 
 ## Setup
@@ -108,7 +108,7 @@ Have a look at the [docs](https://github.com/google/gson/blob/master/UserGuide.m
 
 ## Retrofit and Gson
 
-As you could see from the examples above, the actual response body of the ICNDB API looks like the following:
+As you could see from the examples above, the actual response body of the CNJDB API looks like the following:
 
 ```json
 {
@@ -140,7 +140,7 @@ public abstract class TypeAdapter<T> {
 }
 ```
 
-- Write a type adapter that accepts the response objects from ICNDB and outputs an instance of `Joke`.
+- Write a type adapter that accepts the response objects from CNJDB and outputs an instance of `Joke`.
 - Register the type adapter with your Retrofit instance
 Note that you can use annotations on the `Joke` class, but you will have to write custom code to unwrap the joke from the response object.
 For this, you have two options:
@@ -172,14 +172,14 @@ Read through the [Retrofit documentation](http://square.github.io/retrofit/) and
 Most unix systems will provide the cURL program:
 
 ```bash
-curl -X GET "http://api.icndb.com/jokes/random" -H "accept: application/json"
+curl -X GET "https://api.chucknorris.io/jokes/random" -H "accept: application/json"
 ```
 
 On Windows, you can use the PowerShell to accomplish the same like so:
 
 ```ps
 (Invoke-WebRequest
-    -Uri http://api.icndb.com/jokes/random
+    -Uri https://api.chucknorris.io/jokes/random
     -Headers @{"accept"="application/json"}
     ).Content | ConvertFrom-Json | ConvertTo-Json
 ```

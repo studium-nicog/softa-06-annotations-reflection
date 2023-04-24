@@ -4,17 +4,22 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * @author Peter Kurfer
  * Created on 11/9/17.
  */
 public final class Joke {
-	private int number;
-	private String content;
-	private String[] rubrics;
 
-	public int getNumber() {
-		return number;
+	private String identifier;
+	private String content;
+	private List<String> rubrics;
+
+
+	public String getIdentifier() {
+		return identifier;
 	}
 
 	public String getContent() {
@@ -30,27 +35,27 @@ public final class Joke {
 		Joke joke1 = (Joke) o;
 
 		return new EqualsBuilder()
-				.append(getNumber(), joke1.getNumber())
-				.append(getContent(), joke1.getContent())
-				.append(rubrics, joke1.rubrics)
-				.isEquals();
+			.append(getIdentifier(), joke1.getIdentifier())
+			.append(getContent(), joke1.getContent())
+			.append(rubrics, joke1.rubrics)
+			.isEquals();
 	}
 
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder(17, 37)
-				.append(getNumber())
-				.append(getContent())
-				.append(rubrics)
-				.toHashCode();
+			.append(getIdentifier())
+			.append(getContent())
+			.append(rubrics)
+			.toHashCode();
 	}
 
 	@Override
 	public String toString() {
 		return new ToStringBuilder(this)
-				.append("number", number)
-				.append("content", content)
-				.append("rubrics", rubrics)
-				.toString();
+			.append("identifier", identifier)
+			.append("content", content)
+			.append("rubrics", rubrics)
+			.toString();
 	}
 }

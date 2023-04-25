@@ -19,6 +19,9 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:$apacheCommonsLangVersion")
     implementation("org.apache.logging.log4j:log4j-api:${log4j2Version}")
     implementation("org.apache.logging.log4j:log4j-core:${log4j2Version}")
+    implementation ("com.squareup.retrofit2:retrofit:${squareRetrofitVersion}")
+    implementation ("com.squareup.retrofit2:converter-gson:${squareRetrofitVersion}")
+    implementation ("com.google.code.gson:gson:${gsonVersion}")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")

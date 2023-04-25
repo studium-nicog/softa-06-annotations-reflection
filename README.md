@@ -140,7 +140,7 @@ Note that you can use annotations on the `Joke` class, but you will have to writ
 For this, you have two options:
 
 * Implement a wrapper class, add appropriate fields, and return the `Joke` once unwrapped.
-* Unwrap the `Joke` object manually, by using the `reader`'s `.beginObject()`, `.endObject()` and `.next*()` methods.
+* Unwrap the response object manually, by using the `reader`'s `.beginObject()`, `.endObject()` and `.next*()` methods to determine the number of jokes.
 
 > Note: There is no need to implement the `write` method, since we're only consuming the API, but not sending to it.
 
